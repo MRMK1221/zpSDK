@@ -1,0 +1,144 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+<LinearLayout  
+    
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:orientation="vertical" >  
+  
+    <LinearLayout  
+        android:layout_width="match_parent"  
+        android:layout_height="wrap_content"  
+        android:layout_margin="5dp"  
+        android:orientation="vertical">  
+  <ImageView 
+      android:paddingLeft="5dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/barcode2d"
+      android:layout_gravity="center_horizontal"
+      />
+        <TextView  
+            android:id="@+id/tv_value"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"  
+            android:layout_weight="1"  
+            android:padding="10dp"  
+            android:text="请输入数据："  
+            /> 
+       
+        
+        <EditText 
+            android:id="@+id/barcvalue2d"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            
+            
+            />
+		<TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="对齐方式："
+		    />  
+	
+		    
+		    <RadioGroup
+		        android:id="@+id/aglignaddr2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        >
+		        <RadioButton 
+		            android:id="@+id/left2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:checked="true"
+		            android:text="居左"
+		            />
+		        <RadioButton 
+		            android:id="@+id/middle2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="居中"
+		            />
+		        <RadioButton 
+		            android:id="@+id/right2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="居右"
+		            />
+		    </RadioGroup>
+		    
+		
+		<TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="QR代码型号（1-2）"
+		    />  
+		             
+        <Spinner 
+            android:id="@+id/spinnerQRnum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/spinnerQRcodenum"
+            
+            
+            />
+		
+		<TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="高度/宽度模块点数（1-32）"
+		    />  
+		    <EditText 
+		        android:id="@+id/barcodedot"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:text="6"		        
+		        />
+		    
+		    <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="纠错等级"
+		    />  
+		             
+        <Spinner 
+            android:id="@+id/fixLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:entries="@array/fixLevel"
+            
+            
+            />
+		       <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="输入形式"
+		    />  
+		             
+        <Spinner 
+            android:id="@+id/inputType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/inputType"
+            
+            
+            />
+		    
+    </LinearLayout>  
+    <Button 
+        android:id="@+id/printbarcode2"       
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打印QR码" 
+        android:textSize="25sp"
+        />
+   
+</LinearLayout>
+</ScrollView>

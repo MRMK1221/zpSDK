@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name = "spinnerbartype">
+        <item>Code 128</item>
+        <item>Code 39</item>
+        <item>Code 93</item>
+        <item>ITF</item>
+        <item>CODABAR</item>
+        <item>Code EAN-13</item>
+        <item>EAN-8</item>
+        <item>upc-a</item>
+        <item>upc-e</item>
+        
+    </string-array>
+    <string-array name = "spinnerbarwidth">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        
+        
+    </string-array>
+    <string-array name = "spinnerQRcodenum">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name = "fixLevel">
+        <item>H</item>
+        <item>Q</item>
+        <item>M</item>
+        <item>L</item>
+    </string-array>
+    
+     <string-array name = "inputType">
+        <item>A</item>
+        <item>M</item>
+        <item>N</item>
+        <item>BXXX</item>
+        <item>K</item>
+    </string-array>
+    <string-array name = "spinnertextlocate">
+        <item>不打印</item>
+        <item>正下方</item>
+        
+        
+    </string-array>
+</resources>
