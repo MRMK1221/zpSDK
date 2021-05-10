@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -434,22 +436,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void printPicture() {
 
-            //   mHandler.sendEmptyMessage(0);
-      new Thread() {
-            @Override
-            public void run() {
-                if (!PictureUtil.getInstance(MainActivity.this).connectBT(SelectedBDAddress)) {
-                    Toast.makeText(MainActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
-                    Log.v("zpSDK", "连接失败！");
-                    return;
-                }
-                //for (int i = 0; i < 1; i++)
-                {
-                    PictureUtil.getInstance(MainActivity.this).printPicture(MainActivity.this);
-                }
-                PictureUtil.getInstance(MainActivity.this).disconnectBT();
-            }
-        }.start();
+//            //   mHandler.sendEmptyMessage(0);
+//      new Thread() {
+//            @Override
+//            public void run() {
+//                if (!PictureUtil.getInstance(MainActivity.this).connectBT(SelectedBDAddress)) {
+//                    Toast.makeText(MainActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
+//                    Log.v("zpSDK", "连接失败！");
+//                    return;
+//                }
+//                //for (int i = 0; i < 1; i++)
+//                {
+//                    PictureUtil.getInstance(MainActivity.this).printPicture(MainActivity.this);
+//                }
+//                PictureUtil.getInstance(MainActivity.this).disconnectBT();
+//            }
+//        }.start();
+        zpBluetoothPrinter zpSDK = new zpBluetoothPrinter(this);
+        if (!zpSDK.connect(SelectedBDAddress)) {
+            Toast.makeText(this, "connect fail------", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        zpSDK.pageSetup(580, 600);
+
+
+        /**---------------打印图片-------------------------*/
+
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
+        opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
+        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.test, opts);
+        zpSDK.drawGraphic(30, 20, 0, 0, img);
+
+        /**------------------------打印水印------------------*/
+        zpSDK.bkText(24,2,50,50,110,"2",0);
+        /**------------------------字体放大------------------*/
+        zpSDK.setMag(5,5);
+        /**------------------------打印水印------------------*/
+        zpSDK.bkText(24,4,300,200,110,"R",0);
+        /**------------------------字体不放大-----------------*/
+        zpSDK.setMag(0,0);
+
+        zpSDK.print(0,1);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        zpSDK.disconnect();
 
     }
 }
