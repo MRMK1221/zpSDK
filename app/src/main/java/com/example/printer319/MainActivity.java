@@ -44,21 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             "T 24 0 200 10 " + "UROVO优博讯" + "\n" +
             "PRINT" + "\n";
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            PrinterUtil.getInstance(MainActivity.this).connect(SelectedBDAddress, new PrinterUtil.MessageBack() {
-                @Override
-                public void connect(boolean iRet) {
-                    if (iRet) {
-                        PrinterUtil.getInstance(MainActivity.this).print(null);
-                        mHandler.sendEmptyMessageDelayed(0, 8000);
-                    }
-                }
-            });
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
