@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             "T 24 0 200 10 " + "UROVO优博讯" + "\n" +
             "PRINT" + "\n";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
