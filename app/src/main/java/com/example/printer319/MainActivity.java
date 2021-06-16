@@ -1,6 +1,7 @@
 package com.example.printer319;
 
 
+import zpSDK.zpSDK.GZIPFrame;
 import zpSDK.zpSDK.zpBluetoothPrinter;
 
 
@@ -228,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "connect fail------", Toast.LENGTH_LONG).show();
             return;
         }
-                printer.pageSetup(609, 350);
+        printer.pageSetup(609, 350);
         printer.drawText(10, 10, "打印机测试文字", 1, 0, 0, false, false);
         printer.drawText(10, 30, "打印机测试文字", 2, 0, 0, false, false);
         printer.drawText(10, 80, "打印机测试文字", 3, 0, 0, false, false);
@@ -444,26 +445,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         zpSDK.pageSetup(580, 600);
 
+        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 3, 0, 1, false, false);
+        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 3, 0, 1, false, false);
+        zpSDK.drawText(150, 80, "divnum", "黑体", 12, 0, 3, false, false);
+        zpSDK.print(0, 1);
+
+
 
         /**---------------打印图片-------------------------*/
 
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
-        opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
-        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.test, opts);
-        zpSDK.drawGraphic(30, 20, 0, 0, img);
+//        BitmapFactory.Options opts = new BitmapFactory.Options();
+//        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//        opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
+//        opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
+//        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.yunda, opts);
+//
+//
+//
+//
+//        zpSDK.drawGraphic(30, 20, 0, 0, img);
+//
+//        /**------------------------打印水印------------------*/
+//        zpSDK.bkText(24,2,50,50,110,"2",0);
+//        /**------------------------字体放大------------------*/
+//        zpSDK.setMag(5,5);
+//        /**------------------------打印水印------------------*/
+//        zpSDK.bkText(24,4,300,200,110,"R",0);
+//        /**------------------------字体不放大-----------------*/
+//        zpSDK.setMag(0,0);
+//
+//        zpSDK.noPrint(0,1);
+//
+//
+//        byte []b=GZIPFrame.codec( zpSDK.getprintPrintStr().getBytes());
+//        zpSDK.Write(b);
 
-        /**------------------------打印水印------------------*/
-        zpSDK.bkText(24,2,50,50,110,"2",0);
-        /**------------------------字体放大------------------*/
-        zpSDK.setMag(5,5);
-        /**------------------------打印水印------------------*/
-        zpSDK.bkText(24,4,300,200,110,"R",0);
-        /**------------------------字体不放大-----------------*/
-        zpSDK.setMag(0,0);
 
-        zpSDK.print(0,1);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
