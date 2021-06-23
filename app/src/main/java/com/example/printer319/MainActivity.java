@@ -445,10 +445,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         zpSDK.pageSetup(580, 600);
 
-        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 3, 0, 1, false, false);
-        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 3, 0, 1, false, false);
+        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 3, 0, 0, false, false);
+        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 3, 0, 0, false, false);
         zpSDK.drawText(150, 80, "divnum", "黑体", 12, 0, 3, false, false);
+        zpSDK.setPrintTime(2);
         zpSDK.print(0, 1);
+        zpSDK.printPrintStr();
 
 
 
