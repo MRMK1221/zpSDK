@@ -419,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         zpSDK.disconnect();
     }
 
-    public void printPicture() {
+        public void printPicture() {
 
 //            //   mHandler.sendEmptyMessage(0);
 //      new Thread() {
@@ -445,42 +445,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         zpSDK.pageSetup(580, 600);
 
-        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 3, 0, 0, false, false);
-        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 3, 0, 0, false, false);
-        zpSDK.drawText(150, 80, "divnum", "黑体", 12, 0, 3, false, false);
-        zpSDK.setPrintTime(2);
-        zpSDK.print(0, 1);
-        zpSDK.printPrintStr();
+//        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 1, 0, 0, false, false);
+//        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 2, 0, 0, false, false);
+//        zpSDK.drawText(150, 80, "divnum", "黑体",3 , 0, 3, false, false);
+//        zpSDK.setPrintTime(2);
+//        zpSDK.print(0, 1);
+//        zpSDK.printPrintStr();
 
 
 
         /**---------------打印图片-------------------------*/
 
-//        BitmapFactory.Options opts = new BitmapFactory.Options();
-//        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
-//        opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
-//        opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
-//        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.yunda, opts);
-//
-//
-//
-//
-//        zpSDK.drawGraphic(30, 20, 0, 0, img);
-//
-//        /**------------------------打印水印------------------*/
-//        zpSDK.bkText(24,2,50,50,110,"2",0);
-//        /**------------------------字体放大------------------*/
-//        zpSDK.setMag(5,5);
-//        /**------------------------打印水印------------------*/
-//        zpSDK.bkText(24,4,300,200,110,"R",0);
-//        /**------------------------字体不放大-----------------*/
-//        zpSDK.setMag(0,0);
-//
-//        zpSDK.noPrint(0,1);
-//
-//
-//        byte []b=GZIPFrame.codec( zpSDK.getprintPrintStr().getBytes());
-//        zpSDK.Write(b);
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
+        opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
+        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.yunda, opts);
+
+
+
+
+        zpSDK.drawGraphic(30, 20, 0, 0, img);
+
+        /**------------------------打印水印------------------*/
+        zpSDK.bkText(24,2,50,50,110,"2",0);
+        /**------------------------字体放大------------------*/
+        zpSDK.setMag(5,5);
+        /**------------------------打印水印------------------*/
+        zpSDK.bkText(24,4,300,200,110,"R",0);
+        /**------------------------字体不放大-----------------*/
+        zpSDK.setMag(0,0);
+
 
 
         try {
