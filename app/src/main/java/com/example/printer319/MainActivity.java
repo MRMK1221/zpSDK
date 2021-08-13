@@ -2,26 +2,28 @@ package com.example.printer319;
 
 
 import zpSDK.zpSDK.GZIPFrame;
+import zpSDK.zpSDK._PrinterPageImpl;
+import zpSDK.zpSDK.CONCAT;
 import zpSDK.zpSDK.zpBluetoothPrinter;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -35,7 +37,7 @@ import java.util.Set;
 
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
     public static BluetoothAdapter myBluetoothAdapter;
     public String SelectedBDAddress;
     public static EditText inputText;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (!ListBluetoothDevice())
             Toast.makeText(this, "can not find Bluetooth Adapter!", Toast.LENGTH_LONG).show();
         Button btnString = findViewById(R.id.buttonString);
@@ -167,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             "SETSP 0\n" +
                             "FORM\n" +
                             "PRINT\n");
+
+                   // sendText(SelectedBDAddress,imil);
                 } else {
                     Toast.makeText(MainActivity.this, "no printer！", Toast.LENGTH_LONG).show();
                 }
@@ -229,12 +234,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "connect fail------", Toast.LENGTH_LONG).show();
             return;
         }
-        printer.pageSetup(609, 350);
+        printer.pageSetup(609, 600);
         printer.drawText(10, 10, "打印机测试文字", 1, 0, 0, false, false);
         printer.drawText(10, 30, "打印机测试文字", 2, 0, 0, false, false);
         printer.drawText(10, 80, "打印机测试文字", 3, 0, 0, false, false);
         printer.drawText(10, 120, "打印机测试文字", 4, 0, 0, false, false);
         printer.drawText(10, 200, "打印机测试文字", 5, 0, 0, false, false);
+        printer.drawText(10, 280, "打印机测试文字", 6, 0, 0, false, false);
+        printer.drawText(10, 350, "打印机测试文字", 7, 0, 0, false, false);
+        printer.drawText(10, 420, "打印机测试文字", 8, 0, 0, false, false);
+
+
+//        CONCAT concat1 = new CONCAT(24,0,0,"m");
+//        CONCAT concat2 = new CONCAT(24,0,-10,"3");
+//        printer.textConcatenation(50,50,0,concat1,concat2);
+
+
         printer.print(0, 0);
         printer.disconnect();
     }
@@ -248,8 +263,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         try {
-            zpSDK.Write(new byte[]{0x1B, 0x74, (byte) 0xff});
-            zpSDK.Write(input.getBytes(BStr));
+
+            byte []b = input.getBytes(BStr);
+            byte [] nb = GZIPFrame.codec(b);
+            //zpSDK.Write(new byte[]{0x1B, 0x74, (byte) 0xff});
+            zpSDK.Write(nb);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -406,6 +424,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     public void print2DBarcode() {
         zpBluetoothPrinter zpSDK = new zpBluetoothPrinter(this);
         if (!zpSDK.connect(SelectedBDAddress)) {
@@ -416,42 +435,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         zpSDK.drawQrCode(230, 10, "http://en.urovo.com", 0, 4, 3);
         zpSDK.print(0, 0);
 
+
+
         zpSDK.disconnect();
     }
 
         public void printPicture() {
 
-//            //   mHandler.sendEmptyMessage(0);
-//      new Thread() {
-//            @Override
-//            public void run() {
-//                if (!PictureUtil.getInstance(MainActivity.this).connectBT(SelectedBDAddress)) {
-//                    Toast.makeText(MainActivity.this, "连接失败", Toast.LENGTH_SHORT).show();
-//                    Log.v("zpSDK", "连接失败！");
-//                    return;
-//                }
-//                //for (int i = 0; i < 1; i++)
-//                {
-//                    PictureUtil.getInstance(MainActivity.this).printPicture(MainActivity.this);
-//                }
-//                PictureUtil.getInstance(MainActivity.this).disconnectBT();
-//            }
-//        }.start();
         zpBluetoothPrinter zpSDK = new zpBluetoothPrinter(this);
         if (!zpSDK.connect(SelectedBDAddress)) {
             Toast.makeText(this, "connect fail------", Toast.LENGTH_LONG).show();
             return;
         }
-
-        zpSDK.pageSetup(580, 600);
-
-//        zpSDK.drawText(20, 25, "ddddddddddd", "黑体", 1, 0, 0, false, false);
-//        zpSDK.drawText(400, 25, "dddddddddd", "黑体", 2, 0, 0, false, false);
-//        zpSDK.drawText(150, 80, "divnum", "黑体",3 , 0, 3, false, false);
-//        zpSDK.setPrintTime(2);
-//        zpSDK.print(0, 1);
-//        zpSDK.printPrintStr();
-
 
 
         /**---------------打印图片-------------------------*/
@@ -460,24 +455,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
         opts.inDensity = this.getResources().getDisplayMetrics().densityDpi;
         opts.inTargetDensity = this.getResources().getDisplayMetrics().densityDpi;
-        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.yunda, opts);
-
-
-
-
-        zpSDK.drawGraphic(30, 20, 0, 0, img);
-
-        /**------------------------打印水印------------------*/
-        zpSDK.bkText(24,2,50,50,110,"2",0);
-        /**------------------------字体放大------------------*/
-        zpSDK.setMag(5,5);
-        /**------------------------打印水印------------------*/
-        zpSDK.bkText(24,4,300,200,110,"R",0);
-        /**------------------------字体不放大-----------------*/
-        zpSDK.setMag(0,0);
-
-
-
+        Bitmap img = BitmapFactory.decodeResource(this.getResources(), R.drawable.test, opts);
+        byte[] b= GZIPFrame.Draw_Page_Bitmap_(img);
+        zpSDK.Write(b);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -486,4 +466,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         zpSDK.disconnect();
 
     }
+
+
 }
